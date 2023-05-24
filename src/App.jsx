@@ -54,6 +54,12 @@ const App = () => {
     return null;
   };
 
+  const resetGame = () => {
+    setBoard(Array(9).fill(null));
+    setTurn(TURNS.X);
+    setWinner(null);
+  };
+
   const updateBoard = (index) => {
     //no repeat validator
     if (board[index] || winner) return;
@@ -78,6 +84,7 @@ const App = () => {
   return (
     <main className="board">
       <h1>Tic Tac toe</h1>
+      <button onClick={resetGame}>Resetear</button>
 
       <section className="game">
         {board.map((_, index) => {
@@ -95,19 +102,19 @@ const App = () => {
       </section>
 
       <section>
-        { winner!=null &&(
-            <section className="winner">
-              <div className="text">
-                <h2>{winner == false ? "Empate" : "Ganó:"}</h2>
-                <header className="win">
-                  {winner && <Square>{winner}</Square>}
-                </header>
-                <footer>
-                  <button>Empezar de nuevo</button>
-                </footer>
-              </div>
-            </section>
-          )}
+        {winner != null && (
+          <section className="winner">
+            <div className="text">
+              <h2>{winner == false ? "Empate" : "Ganó:"}</h2>
+              <header className="win">
+                {winner && <Square>{winner}</Square>}
+              </header>
+              <footer>
+                <button onClick={resetGame}>Empezar de nuevo</button>
+              </footer>
+            </div>
+          </section>
+        )}
       </section>
     </main>
   );
