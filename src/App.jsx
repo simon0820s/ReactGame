@@ -54,6 +54,10 @@ const App = () => {
     return null;
   };
 
+  const checkEndGame=(newBoard)=>{
+    return newBoard.every((square) => square!=null)
+  }
+
   const resetGame = () => {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
@@ -74,7 +78,9 @@ const App = () => {
     //Check Winner
     if (newWinner) {
       setWinner(newWinner);
-    } //Check tie
+    } else if(checkEndGame(newBoard)){
+      setWinner(false)
+    }
 
     //toggle turn
     const newTurn = turn == TURNS.X ? TURNS.O : TURNS.X;
